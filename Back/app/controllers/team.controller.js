@@ -1,4 +1,4 @@
-const Driver = require("../models/driver.model.js");
+const Team = require("../models/team.model.js");
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -10,17 +10,19 @@ exports.create = (req, res) => {
     }
 
     // Create a Customer
-    const driver = new Driver({
+    const team = new Team({
         name: req.body.name,
-        team: req.body.team,
-        teamid: req.body.teamid,
+        driver1: req.body.driver1,
+        driver2: req.body.driver2,
         seasons: req.body.seasons,
         championships: req.body.championships,
-        points: req.body.points
+        points: req.body.points,
+        driver1id: req.body.driver1id,
+        driver2id: req.body.driver2id
     });
 
     // Save Customer in the database
-    Driver.create(driver, (err, data) => {
+    Team.create(team, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
@@ -31,7 +33,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    Driver.getAll((err, data) => {
+    Team.getAll((err, data) => {
         if (err)
             res.status(500).send({
                 message:
@@ -42,15 +44,15 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    Driver.findById(req.params.driverId, (err, data) => {
+    Team.findById(req.params.teamId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found Customer with id ${req.params.driverId}.`
+                    message: `Not found Customer with id ${req.params.teamId}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error retrieving Customer with id " + req.params.driverId
+                    message: "Error retrieving Customer with id " + req.params.teamId
                 });
             }
         } else res.send(data);
@@ -65,18 +67,18 @@ exports.update = (req, res) => {
         });
     }
 
-    Driver.updateById(
-        req.params.driverId,
-        new Driver(req.body),
+    Team.updateById(
+        req.params.teamId,
+        new Team(req.body),
         (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
                     res.status(404).send({
-                        message: `Not found driver with id ${req.params.driverId}.`
+                        message: `Not found driver with id ${req.params.teamId}.`
                     });
                 } else {
                     res.status(500).send({
-                        message: "Error updating driver with id " + req.params.driverId
+                        message: "Error updating driver with id " + req.params.teamId
                     });
                 }
             } else res.send(data);

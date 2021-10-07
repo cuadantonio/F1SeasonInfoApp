@@ -1,21 +1,16 @@
 module.exports = app => {
     const driver = require("../controllers/driver.controller.js");
 
-    // Create a new Customer
+    // Create a new Driver
     app.post("/api/drivers", driver.create);
 
-    // Retrieve all Customers
+    // Retrieve all Drivers
     app.get("/api/drivers", driver.findAll);
-/*
-    // Retrieve a single Customer with customerId
-    app.get("/customers/:customerId", customers.findOne);
 
-    // Update a Customer with customerId
-    app.put("/customers/:customerId", customers.update);
+    // Retrieve a single Driver with driverId
+    app.get("/api/drivers/:driverId", driver.findOne);
 
-    // Delete a Customer with customerId
-    app.delete("/customers/:customerId", customers.delete);
+    // Update a Driver with driverId
+    app.put("/api/drivers/:driverId", driver.update);
 
-    // Create a new Customer
-    app.delete("/customers", customers.deleteAll);*/
 };

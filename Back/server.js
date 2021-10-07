@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/driver.routes.js")(app);
+require("./app/routes/team.routes.js")(app);
 
 // set port, listen for requests
 app.listen(8080, () => {
